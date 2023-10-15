@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.co">
+    <title>Typescript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>TYPESCRIPT</h1>
+    <pre><code><b><h3 class="red">/* UNION */</h3>
+<span class="blue">"|" ile birden çok tip ataması yapma</span>
+let code: number | string = "1";
+
+<h3 class="red">/* NUMBER */</b></h3>
+<span class="blue">Number tip belirleme</span>
+let eNumber:number = 10;
+
+<h3 class="red"><b>/* STRING */</b></h3>
+<span class="blue">String tip belirleme</span>
+let eString:string = "Text";
+
+<h3 class="red"><b>/* BOOLEAN */</b></h3>
+<span class="blue">Boolean tip belirleme</span>
+let eBoolen:boolean = true;
+
+<h3 class="red"><b>/* ARRAY */</b></h3>
+<span class="blue">Array tip belirleme</span>
+<span class="green">USAGE 1</span>
+let eArrayNumber1:Array&lt;number> = [1,2,3];
+let eArrayString1:Array&lt;string> = ["John","Doe","Carl"];
+
+<span class="green">USAGE 2</span>
+let eArrayNumber2:string[] = [1,2,3];
+let eArrayString2:number[] = ["John","Doe","Carl"];
+
+<span class="green">USAGE 3</span>
+let eArrayNumber3:(number | string)[] = [1,"Text",3];
+let eArrayString3:Array&lt;number | string> = ["John","Doe","Carl"];
+
+<h3 class="red"><b>/* TUPLE */</b></h3>
+<span class="blue">Dizi ile belirlenen tip sırasına göre Array oluşturma</span>
+<span class="green">USAGE 1</span>
+let eTuple:[number, string, boolean] = [1,"Text",true];
+
+<span class="green">USAGE 2</span>
+let eTuple:[number, string][] = [[1,"Text"],[2,"Text"],[3,"Text"]];
+
+<h3 class="red"><b>/* OBJECT */</b></h3>
+<span class="green">USAGE 1</span>
+let eObject1:{name:string,surname:string,age: number, isOK: boolean}
+eObject1 = {name:"John",surname:"Doe",age: 20, isOK: true};
+
+<span class="green">USAGE 2</span>
+type objectTypes1 = {name:string,surname:string,age: number, isOK: boolean}
+let eObject:objectTypes1 = {name:"John",surname:"Doe",age: 20, isOK: true};
+
+<span class="green">USAGE 3</span>
+let objectTypes2: {name:string,surname:string,age: number, isOK: boolean} = {name:"John",surname:"Doe",age: 20, isOK: true};
+
+<h3 class="red">/* ENUM */</h3>
+<span class="green">/* NUMBER ENUM */</span>
+<span class="blue">ilk öğe 0 ile başlar ve diğer öğeler buna göre artar</span>
+enum enumNumber1 {
+Photo1,
+Photo2,
+Photo3
+}
+console.log(enumNumber1.Photo1); // 0
+console.log(enumNumber1[0]); // Photo1
+
+<span class="green">/* NUMBER ENUM */</span>
+<span class="blue">ilk öğe belirtilen değer ile başlar ve diğer öğeler buna göre artar</span>
+enum enumNumber2 {
+Photo1 = 1,
+Photo2,
+Photo3
+}
+console.log(enumNumber2.Photo1); // 1
+console.log(enumNumber2[1]); // Photo1
+
+<span class="green">/* STRING ENUM */</span>
+<span class="blue">Belirtilen öğeler belirtilen değerleri tutar</span>
+enum enumString {
+Photo1 = "photo-1",
+Photo2 = "photo-2",
+Photo3 = "photo-3"
+}
+console.log(enumString.Photo1); // "photo-1"
+console.log(enumString[0]); // Photo1
+
+<h3 class="red"><b>/* ANY */</b></h3>
+<span class="blue">Veri tipi belirtilmek istenmediğinde kullanılır.</span>
+let anyExample: any;
+anyExample: 1;
+anyExample: "Text";
+anyExample: true;
+
+<span class="green">/* ANY ARRAY */</span>
+let anyArray:any[] = [1,"Text",false];
+
+<h3 class="red"><b>/* VOID */</b></h3>
+<span class="blue">Geriye değer döndürmeyen fonksiyonlarda kullanılır.</span>
+let func = function():void {
+console.log("Hello World");
+}
+
+<h3 class="red"><b>/* NEVER */</b></h3>
+<span class="blue">Geriye hiçbirşey döndürmeyen fonksiyonlarda kullanılır.</span>
+let func = function():never {
+console.log("Hello World");
+}
+
+<span class="red">VOID ve NEVER arasındaki fark
+Void tipine "null ve undefined" atayabiliriz
+Never tipine hiçbirşey atayamayız.</span>
+        
+<h3 class="red">/* PARAMETER */</h3>
+<span class="blue">Fonksiyonlarda parametrelerin tipini belirtme</span>
+let func = function(a:number, b:number){
+    return a+b;
+}
+
+<h3 class="red">/* RETURN */</h3>
+<span class="blue">Fonksiyonlarda geriye dönülen değerin tipini belirtme</span>
+let func = function(a:number, b:number):string{
+    return a+b;
+}
+
+<h3 class="red">/* OVERLOAD */</h3>
+<span class="blue">Fonksiyona belirtilecek parametrelerin tiplerini belirtme.</span>
+function func(a:number, b:number):number;
+function func(a:string, b:string):string;
+function func(a:any, b:any):any{
+    return a+b;
+}
+
+let funcData1 = func(2,5); // OK
+let funcData2 = func("2","5"); // OK
+let funcData3 = func(true,true); // WRONG
+
+console.log(funcData1); // OK
+console.log(funcData2); // OK
+console.log(funcData3); // WRONG
+
+<h3 class="red">/* REST PARAMETRES */</h3>
+<span class="blue">Spread operatörü ile gelecek parametreleri yönetme. tipin sonuna [] array olucağını belirtmeliyiz.</span>
+function total(...numbers:number[]):number{
+    let total = 0;
+    numbers.forEach(number => {
+        total += number;
+    });
+    return total;
+}
+console.log(total(10,20,30)); // 60
+
+<span class="blue">Farklı bir parametre gelicekse spread operatörü en son kullanılmalı.</span>
+function total(name:string, ...numbers:number[]):number{
+    console.log(name);
+    let total = 0;
+    numbers.forEach(number => {
+        total += number;
+    });
+    return total;
+}
+console.log(total("John",10,20,30)); // Can 60
+
+<span class="blue">String örnek;</span>
+function sayHi(message,...names:string[]):string{
+    let text = message + names.join();
+    return text;
+}
+console.log(sayHi("Selam","John","Carl","Mark")); // Selam John Carl Mark
+
+<h3 class="red">/* INTERFACE */</h3>
+<span class="blue">Typeleri obje olarak belirleyip kullanmayı sağlar.</span>
+interface Test {
+    name: string,
+    age: number
+}
+
+function func(people:Test){
+    return people.name + " " + people.age;
+}
+
+console.log(func({name:"Ali", age:30}));
+
+/* OPTIONAL PARAMETRE */
+<span class="blue">Interface içerisinde ? ile tanımlanan keyler opsiyoneldir.</span>
+interface Test {
+    name: string,
+    surname?: string,
+    age: number
+}
+
+/* READONLY */
+<span class="blue">Interface içerisindeki tipi değiştirilmez yapar.</span>
+interface Test {
+    readonly name: string,
+    surname?: string,
+    age: number
+}
+
+/* FUNCTION TYPE INTERFACE */
+<span class="blue">Interface içerisindeki tipi değiştirilmez yapar.</span>
+interface stringFormat {
+    (str:string, isCase: boolean):string
+}
+
+let format: stringFormat = function (str:string,isCase:boolean):string{
+     return isCase ? str.toUpperCase() : str.toLowerCase();
+}
+
+console.log(format("John Doe", false));
+
+<h3 class="red">/* PARAMETRE */</h3>
+<span class="blue">Constructora gelicek parametrelerin tiplerini belirtme.</span>
+class Person {
+    code:number;
+    name:string;
+    surname:string;
+    constructor(code:number,name:string,surname:string){
+        this.code= code;
+        this.name= name;
+        this.surname= surname;
+    }
+}
+
+let newPerson = new Person(15,"John","Doe");
+console.log(newPerson);
+
+<h3 class="red">/* PUBLIC, PRIVATE, PROTECTED, READONLY */</h3>
+<span class="green">/* PUBLIC */</span>
+<span class="blue">Dışarıdan erişilebilir değerler için kullanılır varsayılan publictir.</span>
+class Person {
+    public code:number;
+    public name:string;
+    public surname:string;
+    constructor(code:number,name:string,surname:string){
+        this.code= code;
+        this.name= name;
+        this.surname= surname;
+    }
+}
+
+let newPerson = new Person(15,"John","Doe");
+console.log(newPerson.code); // 15
+
+<span class="green">/* PRIVATE */</span>
+<span class="blue">Dışarıdan erişelemez.</span>
+class Person {
+    private code:number;
+    private name:string;
+    private surname:string;
+    constructor(code:number,name:string,surname:string){
+        this.code= code;
+        this.name= name;
+        this.surname= surname;
+    }
+}
+
+let newPerson = new Person(15,"John","Doe");
+console.log(newPerson.code); // X(erişilemez.)
+
+<span class="green">/* PROTECTED */</span>
+<span class="blue">Dışarıdan erişelemez fakat miras alınan classlardan erişilebilir.</span>
+class Person {
+    protected code:number;
+    protected name:string;
+    protected surname:string;
+    constructor(code:number,name:string,surname:string){
+        this.code= code;
+        this.name= name;
+        this.surname= surname;
+    }
+}
+
+let newPerson = new Person(15,"John","Doe");
+console.log(newPerson.code); // X(erişilemez.)
+
+<span class="green">/* READONLY */</span>
+<span class="blue">Dışarıdan erişilebilir fakat değişterilemez.</span>
+class Person {
+    readonly code:number;
+    name:string; 
+    surname:string;
+    constructor(code:number,name:string,surname:string){
+        this.code= code;
+        this.name= name;
+        this.surname= surname;
+    }
+}
+
+let newPerson = new Person(15,"John","Doe");
+console.log(newPerson.code); // 15
+newPerson.code = 40; // X(değişterilemez)
+console.log(newPerson.code); // X
+
+<h3 class="red">/* INTERFACE EXTENDS */</h3>
+<span class="blue">Interface miras alma.</span>
+interface Test {
+    name: string,
+    surname: string
+}
+interface Test2 extends Test {
+    age: number
+}
+
+<h3 class="red">/* INTERFACE IMPLEMENTS */</h3>
+<span class="blue">Classa interface bağlama</span>
+interface Test {
+    name: string,
+    surname: string
+}
+class testClass impelements Test {
+    name: string,
+    surname: string,
+    age: number
+    constructor(){
+
+    }
+}
+
+<h3 class="red">/* TYPE INTERSECTION */</span>
+<span class="blue">& ile interfaceleri birleştirme</span>
+interface Test1 {
+    name:string;
+    surname:string;
+}
+
+interface Test2 {
+    mail:string;
+    phone:string;
+}
+
+type Test3 = Test1 & Test2;
+
+let Test3 = {
+    name: "John",
+    surname: "Doe",
+    mail: "test@mail.com",
+    phone: "555 555 55 55"
+}
+
+</code></pre>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
