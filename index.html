@@ -6,326 +6,224 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.co">
     <title>Typescript</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>TYPESCRIPT</h1>
-    <pre><code><b><h3 class="red">/* UNION */</h3>
-<span class="blue">"|" ile birden çok tip ataması yapma</span>
-let code: number | string = "1";
+    <div class="container">
+        <h1>TYPESCRIPT</h1>
+        <p class="alert alert-primary">Typescript, Javascripti superset bir dil yapar. Super ve Set kelimelerinden
+            türeyen Superset kelimesinin anlamı süpere set etmek anlamına gelir.
+            Yani Typescript, Javascriptin eksiklerini tamamlar ve geliştirme aşamasında daha az hata ile kod yazılmasını
+            sağlar.<br><br>
 
-<h3 class="red">/* NUMBER */</b></h3>
-<span class="blue">Number tip belirleme</span>
-let eNumber:number = 10;
+            Bir programlama dili olan Javascript'te diğer programlama dillerinin aksine belirlenen değerlere tip ataması
+            yapılamaz. Javascriptte değişkenler,parametreler vs belirtilen değerin tipine bürünür. Javascriptteki bu
+            eksik Typescript ile kapatılır.<br><br>
+            Backend'de beklenen sayı number veri tipine ait olmalı ise gönderilen sayı string veri tipine sahipse
+            buradaki hata
+            çalışma aşamasında farkedilebilir.<br><br>
+            Typescript ile değerlerin tipini geliştirme aşamasında belirleriz ve eğer veri tipleri ile alakalı bir sorun
+            var ise bu hata geliştirme aşamasında düzeltilir.<br>
+            Typescriptin eksi yönü ise bir transpiler'a ihtiyaç duymasıdır. Yazılan Typescript kodlarının
+            Javascripte dönüştürülmesi gerekir.<br><br>
 
-<h3 class="red"><b>/* STRING */</b></h3>
-<span class="blue">String tip belirleme</span>
-let eString:string = "Text";
+            <b>TRANSPILER, COMPILER ARASINDAKİ FARK</b><br>
+            Compiler yazılan kodu belirlenen bir dile çevirir. Transpiler ise farklı bir dille yazılan kodu farklı bir
+            programlama diline
+            çevirir.
+        </p>
 
-<h3 class="red"><b>/* BOOLEAN */</b></h3>
-<span class="blue">Boolean tip belirleme</span>
-let eBoolen:boolean = true;
+        <h4>MAP</h4>
+        <p class="alert alert-success">
+            <b>Terms</b><br>
+            <a href="#typeassertion">Type Assertion</a>, <a href="#typeannotation">Type Annotation</a>, <a
+                href="#typeinference">Type Inference</a>, <a href="#typeintersection">Type Intersection</a>, <a
+                href="#typeguard">Type Guard</a><br>
+            <b>Data Types</b><br>
+            <a href="#number">Number</a>, <a href="#string">String</a>, <a href="#boolean">Boolean</a>, <a
+                href="#number">Array</a>, <a href="#object">Object</a>, <a href="#any">Any</a>, <a
+                href="#void">Void</a>, <a href="#never">Never</a><br>
+            <b>Operators</b><br>
+            <a href="#type">Type</a>, <a href="#union">Union</a>, <a href="#optional">Optional</a>, <a
+                href="#tuple">Tuple</a>, <a href="#enum">Enum</a>, <a href="#insertion">Insertion</a><br>
+            <b>Function</b><br>
+            <a href="#parameter">Parameter</a>, <a href="#restparameters">Rest Parameter</a>, <a
+                href="#return">Return</a>, <a href="#overload">Overload</a><br>
+            <b>Interface</b><br>
+            <a href="#interface">Interface</a>, <a href="#functiontypeinterface">Function Type Interface</a>, <a
+                href="#interfaceextends">Interface Extends</a><br>
+            <b>Class</b><br>
+            <a href="#classparameters">Class Parameters</a>, <a href="#interfaceimplements">Interface Implements</a><br>
+            <b>Access Modifier</b><br>
+            <a href="#accessmodifier">Public, Private, Protected, Readonly</a><br>
+            <b>Generic</b><br>
+            <a href="#generic">Generic</a>, <a href="#genericconstraints">Generic Constraints</a>
+        </p>
 
-<h3 class="red"><b>/* ARRAY */</b></h3>
-<span class="blue">Array tip belirleme</span>
-<span class="green">USAGE 1</span>
-let eArrayNumber1:Array&lt;number> = [1,2,3];
-let eArrayString1:Array&lt;string> = ["John","Doe","Carl"];
+        <h6 id="typeassertion"><i class="bi bi-arrow-return-right"></i> TYPE ASSERTION <span>Terms</span></h6>
+        <pre><code><span class="blue">Type Assertions ile bir değişkenin içereği verinin türünü belirtebiliriz. Değerin bu tipe dönüştürülebilmesi gerekir.</span>
+let numberTest;
+numberTest = <span class="code-text">&lt;number></span>10; // SUCCESS
+numberTest = <span class="code-text">&lt;string></span>10; // ERROR
 
-<span class="green">USAGE 2</span>
-let eArrayNumber2:string[] = [1,2,3];
-let eArrayString2:number[] = ["John","Doe","Carl"];
+<span class="green">veya</span>
 
-<span class="green">USAGE 3</span>
-let eArrayNumber3:(number | string)[] = [1,"Text",3];
-let eArrayString3:Array&lt;number | string> = ["John","Doe","Carl"];
+let numberTest;
+numberTest = 10 <span class="code-text">as number</span>; // SUCCESS
+numberTest = 10 <span class="code-text">as string</span>; // ERROR</code></pre>
 
-<h3 class="red"><b>/* TUPLE */</b></h3>
-<span class="blue">Dizi ile belirlenen tip sırasına göre Array oluşturma</span>
-<span class="green">USAGE 1</span>
-let eTuple:[number, string, boolean] = [1,"Text",true];
+        <h6 id="typeannotation"><i class="bi bi-arrow-return-right"></i> TYPE ANNOTATION <span>Terms</span></h6>
+        <pre><code><span class="blue">Type Annotation tiplerin belirtilme durumudur. Bunlara örnek olarak numberTest:number veya stringTest:string verilebilir.</span></code></pre>
 
-<span class="green">USAGE 2</span>
-let eTuple:[number, string][] = [[1,"Text"],[2,"Text"],[3,"Text"]];
+        <h6 id="typeinference"><i class="bi bi-arrow-return-right"></i> TYPE INFERENCE <span>Terms</span></h6>
+        <pre><code><span class="blue">Type Inference bir değişkenine herhangi bir tip belirtilmediğinde değerinin tipini almasıdır. Örnek test=10; typeof test // number</span></code></pre>
 
-<h3 class="red"><b>/* OBJECT */</b></h3>
-<span class="green">USAGE 1</span>
-let eObject1:{name:string,surname:string,age: number, isOK: boolean}
-eObject1 = {name:"John",surname:"Doe",age: 20, isOK: true};
+        <h6 id="typeintersection"><i class="bi bi-arrow-return-right"></i> TYPE INTERSECTION <span>Terms</span></h6>
+        <pre><code><span class="blue">Type Intersection, Union ve Insertion kavramlarını ifade eder.</span></code></pre>
 
-<span class="green">USAGE 2</span>
-type objectTypes1 = {name:string,surname:string,age: number, isOK: boolean}
-let eObject:objectTypes1 = {name:"John",surname:"Doe",age: 20, isOK: true};
+        <h6 id="typeguard"><i class="bi bi-arrow-return-right"></i> TYPE GUARD <span>Terms</span></h6>
+        <pre><code><span class="blue">Type Guard, tiplerin typeof veya instanceof ile kontrol edilmesidir.</span></code></pre>
 
-<span class="green">USAGE 3</span>
-let objectTypes2: {name:string,surname:string,age: number, isOK: boolean} = {name:"John",surname:"Doe",age: 20, isOK: true};
 
-<h3 class="red">/* ENUM */</h3>
-<span class="green">/* NUMBER ENUM */</span>
-<span class="blue">ilk öğe 0 ile başlar ve diğer öğeler buna göre artar</span>
-enum enumNumber1 {
-Photo1,
-Photo2,
-Photo3
+        <hr>
+        <hr>
+
+        <h6 id="number"><i class="bi bi-arrow-return-right"></i> NUMBER <span>Data Types</span></h6>
+        <pre><code><span class="blue">Number tip belirleme</span>
+let eNumber<span class="code-text">:number</span> = 10;</code></pre>
+
+        <h6 id="string"><i class="bi bi-arrow-return-right"></i> STRING <span>Data Types</span></h6>
+        <pre><code><span class="blue">String tip belirleme</span>
+let eString<span class="code-text">:string</span> = "Text";</code></pre>
+
+        <h6 id="boolean"><i class="bi bi-arrow-return-right"></i> BOOLEAN <span>Data Types</span></h6>
+        <pre><code><span class="blue">Boolean tip belirleme</span>
+let eBoolen<span class="code-text">:boolean</span> = true;</code></pre>
+
+        <h6 id="array"><i class="bi bi-arrow-return-right"></i> ARRAY <span>Data Types</span></h6>
+        <pre><code><span class="blue">Array tip belirleme</span>
+<span class="green">KULLANIM 1</span>
+let eArrayNumber2<span class="code-text">:string[]</span> = [1,2,3];
+let eArrayString2<span class="code-text">:number[]</span> = ["John","Doe","Carl"];
+<span class="green">KULLANIM 2</span>
+let eArrayNumber1<span class="code-text">:Array&lt;number></span> = [1,2,3];
+let eArrayString1<span class="code-text">:Array&lt;string></span> = ["John","Doe","Carl"];</code></pre>
+
+        <h6 id="object"><i class="bi bi-arrow-return-right"></i> OBJECT <span>Data Types</span></h6>
+        <pre><code><span class="blue">Object tip belirleme</span>
+<span class="green">KULLANIM 1</span>
+let objectTypes2<span class="code-text">:{name:string,surname:string,age: number, isOK: boolean}</span> = {name:"John",surname:"Doe",age: 20, isOK: true};</code></pre>
+
+        <h6 id="any"><i class="bi bi-arrow-return-right"></i> ANY <span>Data Types</span></h6>
+        <pre><code><span class="blue">Veri tipi belirtilmek istenmediğinde kullanılır.</span>
+let anyExample<span class="code-text">:any</span>;
+anyExample: 1;
+anyExample: "Text";
+anyExample: true;</code></pre>
+
+        <h6 id="void"><i class="bi bi-arrow-return-right"></i> VOID <span>Data Types</span></h6>
+        <pre><code><span class="blue">Geriye değer döndürmeyen fonksiyonlarda kullanılır. Değişkene atandığında undefined döner.</span>
+let func = function()<span class="code-text">:void</span> {
+    console.log("Hello World");
 }
+console.log(func); // undefined</code></pre>
+
+        <h6 id="never"><i class="bi bi-arrow-return-right"></i> NEVER <span>Data Types</span></h6>
+        <pre><code><span class="blue">Geriye hiçbirşey döndürmeyen fonksiyonlarda hata fırlatmak için kullanılır.</span>
+let func = function()<span class="code-text">:never</span> {
+    throw 'Error message';
+}</code></pre>
+
+        <hr>
+        <hr>
+
+        <h6 id="type"><i class="bi bi-arrow-return-right"></i> TYPE <span>Operator</span></h6>
+        <pre><code><span class="code-text">type objectTypes1 = {name:string,surname:string,age: number, isOK: boolean}</span>
+let eObject<span class="code-text">:objectTypes1</span> = {name:"John",surname:"Doe",age: 20, isOK: true};
+
+<span class="code-text">type numberType = number;</span>
+const numberVariable<span class="code-text">:numberType</span> = 10;</code></pre>
+
+        <h6 id="union"><i class="bi bi-arrow-return-right"></i> UNION <span>Operator</span></h6>
+        <pre><code><span class="blue">"|" ile birden çok tip ataması yapma</span>
+<span class="green">BASİT KULLANIM</span>
+let code<span class="code-text">:number | string</span> = "1";
+<span class="green">ARRAY KULLANIM</span>
+let eArrayNumber3<span class="code-text">:(number | string)[]</span> = [1,"Text",3];
+let eArrayString3<span class="code-text">:Array&lt;number | string></span> = ["John","Doe","Carl"];</code></pre>
+
+        <h6 id="optional"><i class="bi bi-arrow-return-right"></i> OPTIONAL <span>Operator</span></h6>
+        <pre><code><span class="blue">? ile tanımlanan keyler opsiyoneldir.</span>
+interface Test {
+    name: string,
+    <span class="code-text">surname?: string,</span>
+    age: number
+}
+
+<span class="green">veya</span>
+
+let func = function(<span class="code-text">a?:number</span>, b:number){
+    console.log(a+' '+b)
+}</code></pre>
+
+        <h6 id="tuple"><i class="bi bi-arrow-return-right"></i> TUPLE <span>Operator</span></h6>
+        <pre><code><span class="blue">Dizi ile belirlenen tip sırası belirleme</span>
+<span class="green">KULLANIM 1</span>
+let eTuple<span class="code-text">:[number, string, boolean]</span> = [1,"Text",true];
+
+<span class="green">KULLANIM 2</span>
+let eTuple<span class="code-text">:[number, string][]</span> = [[1,"Text"],[2,"Text"],[3,"Text"]];</code></pre>
+
+        <h6 id="enum"><i class="bi bi-arrow-return-right"></i> ENUM <span>Operator</span></h6>
+        <pre><code><span class="green">NUMBER ENUM</span>
+<span class="blue">ilk öğe 0 ile başlar ve diğer öğeler buna göre artar. İlk öğeye bir sayı atanırsa sonraki öğeler buna göre artar.</span>
+<span class="code-text">enum enumNumber1 {
+    Photo1,
+    Photo2,
+    Photo3
+}</span>
 console.log(enumNumber1.Photo1); // 0
 console.log(enumNumber1[0]); // Photo1
 
-<span class="green">/* NUMBER ENUM */</span>
-<span class="blue">ilk öğe belirtilen değer ile başlar ve diğer öğeler buna göre artar</span>
-enum enumNumber2 {
-Photo1 = 1,
-Photo2,
-Photo3
-}
+<span class="code-text">enum enumNumber2 {
+    Photo1 = 1,
+    Photo2,
+    Photo3
+}</span>
 console.log(enumNumber2.Photo1); // 1
 console.log(enumNumber2[1]); // Photo1
 
-<span class="green">/* STRING ENUM */</span>
+<span class="green">STRING ENUM</span>
 <span class="blue">Belirtilen öğeler belirtilen değerleri tutar</span>
-enum enumString {
-Photo1 = "photo-1",
-Photo2 = "photo-2",
-Photo3 = "photo-3"
-}
+<span class="code-text">enum enumString {
+    Photo1 = "photo-1",
+    Photo2 = "photo-2",
+    Photo3 = "photo-3"
+}</span>
 console.log(enumString.Photo1); // "photo-1"
-console.log(enumString[0]); // Photo1
+console.log(enumString[0]); // Photo1</code></pre>
 
-<h3 class="red"><b>/* ANY */</b></h3>
-<span class="blue">Veri tipi belirtilmek istenmediğinde kullanılır.</span>
-let anyExample: any;
-anyExample: 1;
-anyExample: "Text";
-anyExample: true;
-
-<span class="green">/* ANY ARRAY */</span>
-let anyArray:any[] = [1,"Text",false];
-
-<h3 class="red"><b>/* VOID */</b></h3>
-<span class="blue">Geriye değer döndürmeyen fonksiyonlarda kullanılır.</span>
-let func = function():void {
-console.log("Hello World");
-}
-
-<h3 class="red"><b>/* NEVER */</b></h3>
-<span class="blue">Geriye hiçbirşey döndürmeyen fonksiyonlarda kullanılır.</span>
-let func = function():never {
-console.log("Hello World");
-}
-
-<span class="red">VOID ve NEVER arasındaki fark
-Void tipine "null ve undefined" atayabiliriz
-Never tipine hiçbirşey atayamayız.</span>
-        
-<h3 class="red">/* PARAMETER */</h3>
-<span class="blue">Fonksiyonlarda parametrelerin tipini belirtme</span>
-let func = function(a:number, b:number){
-    return a+b;
-}
-
-<h3 class="red">/* RETURN */</h3>
-<span class="blue">Fonksiyonlarda geriye dönülen değerin tipini belirtme</span>
-let func = function(a:number, b:number):string{
-    return a+b;
-}
-
-<h3 class="red">/* OVERLOAD */</h3>
-<span class="blue">Fonksiyona belirtilecek parametrelerin tiplerini belirtme.</span>
-function func(a:number, b:number):number;
-function func(a:string, b:string):string;
-function func(a:any, b:any):any{
-    return a+b;
-}
-
-let funcData1 = func(2,5); // OK
-let funcData2 = func("2","5"); // OK
-let funcData3 = func(true,true); // WRONG
-
-console.log(funcData1); // OK
-console.log(funcData2); // OK
-console.log(funcData3); // WRONG
-
-<h3 class="red">/* REST PARAMETRES */</h3>
-<span class="blue">Spread operatörü ile gelecek parametreleri yönetme. tipin sonuna [] array olucağını belirtmeliyiz.</span>
-function total(...numbers:number[]):number{
-    let total = 0;
-    numbers.forEach(number => {
-        total += number;
-    });
-    return total;
-}
-console.log(total(10,20,30)); // 60
-
-<span class="blue">Farklı bir parametre gelicekse spread operatörü en son kullanılmalı.</span>
-function total(name:string, ...numbers:number[]):number{
-    console.log(name);
-    let total = 0;
-    numbers.forEach(number => {
-        total += number;
-    });
-    return total;
-}
-console.log(total("John",10,20,30)); // Can 60
-
-<span class="blue">String örnek;</span>
-function sayHi(message,...names:string[]):string{
-    let text = message + names.join();
-    return text;
-}
-console.log(sayHi("Selam","John","Carl","Mark")); // Selam John Carl Mark
-
-<h3 class="red">/* INTERFACE */</h3>
-<span class="blue">Typeleri obje olarak belirleyip kullanmayı sağlar.</span>
-interface Test {
-    name: string,
+        <h6 id="insertion"><i class="bi bi-arrow-return-right"></i> INSERTION <span>Operator</span></h6>
+        <pre><code><span class="blue">& ile tip birleştirme.</span>
+type testType1 = {
+    name: string
+};
+type testType2 = {
     age: number
-}
+};
 
-function func(people:Test){
-    return people.name + " " + people.age;
-}
+type newType = testType1 <span class="code-text">&</span> testType2;
 
-console.log(func({name:"Ali", age:30}));
+let variableTest:newType = {
+    name: "John",
+    age: 20
+};
 
-/* OPTIONAL PARAMETRE */
-<span class="blue">Interface içerisinde ? ile tanımlanan keyler opsiyoneldir.</span>
-interface Test {
-    name: string,
-    surname?: string,
-    age: number
-}
+<span class="green">veya</span>
 
-/* READONLY */
-<span class="blue">Interface içerisindeki tipi değiştirilmez yapar.</span>
-interface Test {
-    readonly name: string,
-    surname?: string,
-    age: number
-}
-
-/* FUNCTION TYPE INTERFACE */
-<span class="blue">Interface içerisindeki tipi değiştirilmez yapar.</span>
-interface stringFormat {
-    (str:string, isCase: boolean):string
-}
-
-let format: stringFormat = function (str:string,isCase:boolean):string{
-     return isCase ? str.toUpperCase() : str.toLowerCase();
-}
-
-console.log(format("John Doe", false));
-
-<h3 class="red">/* PARAMETRE */</h3>
-<span class="blue">Constructora gelicek parametrelerin tiplerini belirtme.</span>
-class Person {
-    code:number;
-    name:string;
-    surname:string;
-    constructor(code:number,name:string,surname:string){
-        this.code= code;
-        this.name= name;
-        this.surname= surname;
-    }
-}
-
-let newPerson = new Person(15,"John","Doe");
-console.log(newPerson);
-
-<h3 class="red">/* PUBLIC, PRIVATE, PROTECTED, READONLY */</h3>
-<span class="green">/* PUBLIC */</span>
-<span class="blue">Dışarıdan erişilebilir değerler için kullanılır varsayılan publictir.</span>
-class Person {
-    public code:number;
-    public name:string;
-    public surname:string;
-    constructor(code:number,name:string,surname:string){
-        this.code= code;
-        this.name= name;
-        this.surname= surname;
-    }
-}
-
-let newPerson = new Person(15,"John","Doe");
-console.log(newPerson.code); // 15
-
-<span class="green">/* PRIVATE */</span>
-<span class="blue">Dışarıdan erişelemez.</span>
-class Person {
-    private code:number;
-    private name:string;
-    private surname:string;
-    constructor(code:number,name:string,surname:string){
-        this.code= code;
-        this.name= name;
-        this.surname= surname;
-    }
-}
-
-let newPerson = new Person(15,"John","Doe");
-console.log(newPerson.code); // X(erişilemez.)
-
-<span class="green">/* PROTECTED */</span>
-<span class="blue">Dışarıdan erişelemez fakat miras alınan classlardan erişilebilir.</span>
-class Person {
-    protected code:number;
-    protected name:string;
-    protected surname:string;
-    constructor(code:number,name:string,surname:string){
-        this.code= code;
-        this.name= name;
-        this.surname= surname;
-    }
-}
-
-let newPerson = new Person(15,"John","Doe");
-console.log(newPerson.code); // X(erişilemez.)
-
-<span class="green">/* READONLY */</span>
-<span class="blue">Dışarıdan erişilebilir fakat değişterilemez.</span>
-class Person {
-    readonly code:number;
-    name:string; 
-    surname:string;
-    constructor(code:number,name:string,surname:string){
-        this.code= code;
-        this.name= name;
-        this.surname= surname;
-    }
-}
-
-let newPerson = new Person(15,"John","Doe");
-console.log(newPerson.code); // 15
-newPerson.code = 40; // X(değişterilemez)
-console.log(newPerson.code); // X
-
-<h3 class="red">/* INTERFACE EXTENDS */</h3>
-<span class="blue">Interface miras alma.</span>
-interface Test {
-    name: string,
-    surname: string
-}
-interface Test2 extends Test {
-    age: number
-}
-
-<h3 class="red">/* INTERFACE IMPLEMENTS */</h3>
-<span class="blue">Classa interface bağlama</span>
-interface Test {
-    name: string,
-    surname: string
-}
-class testClass impelements Test {
-    name: string,
-    surname: string,
-    age: number
-    constructor(){
-
-    }
-}
-
-<h3 class="red">/* TYPE INTERSECTION */</span>
-<span class="blue">& ile interfaceleri birleştirme</span>
 interface Test1 {
     name:string;
     surname:string;
@@ -336,16 +234,259 @@ interface Test2 {
     phone:string;
 }
 
-type Test3 = Test1 & Test2;
+type Test3 = Test1 <span class="code-text">&</span> Test2;
 
 let Test3 = {
     name: "John",
     surname: "Doe",
     mail: "test@mail.com",
     phone: "555 555 55 55"
+}</code></pre>
+
+        <hr>
+        <hr>
+
+        <h6 id="parameter"><i class="bi bi-arrow-return-right"></i> PARAMETER <span>Function</span></h6>
+        <pre><code><span class="blue">Fonksiyonlarda parametrelerin tipini belirtme</span>
+let func = function(<span class="code-text">a:number, b:number</span>){
+    return a+b;
+}</code></pre>
+
+        <h6 id="restparameters"><i class="bi bi-arrow-return-right"></i> REST PARAMETRES <span>Function</span></h6>
+        <pre><code><span class="blue">Spread operatörü ile gelecek parametreleri yönetme. tipin sonuna [] array olucağını belirtmeliyiz.</span>
+function total(<span class="code-text">...numbers:number[]</span>):number{
+    let total = 0;
+    numbers.forEach(number => {
+        total += number;
+    });
+    return total;
+}
+console.log(total(10,20,30)); // 60
+
+<span class="blue">Farklı bir parametre gelicekse spread operatörü en son kullanılmalı.</span>
+function total(<span class="code-text">name:string, ...numbers:number[]</span>):number{
+    console.log(name);
+    let total = 0;
+    numbers.forEach(number => {
+        total += number;
+    });
+    return total;
+}
+console.log(total("John",10,20,30)); // Can 60
+
+<span class="green">STRING</span>
+function sayHi(<span class="code-text">message,...names:string[]</span>):string{
+    let text = message + names.join();
+    return text;
+}
+console.log(sayHi("Hello","John","Carl","Mark")); // Hello John,Carl,Mark</code></pre>
+
+        <h6 id="return"><i class="bi bi-arrow-return-right"></i> RETURN <span>Function</span></h6>
+        <pre><code><span class="blue">Fonksiyonlarda geriye dönülen değerin tipini belirtme</span>
+let func = function(a:number, b:number)<span class="code-text">:string</span>{
+    return a+b;
+}</code></pre>
+
+        <h6 id="overload"><i class="bi bi-arrow-return-right"></i> OVERLOAD <span>Function</span></h6>
+        <pre><code><span class="blue">Fonksiyona belirtilecek parametrelerin tiplerini belirtme.</span>
+<span class="code-text">function func(a:number, b:number):number;
+function func(a:string, b:string):string;</span>
+function func(a:any, b:any):any{
+    return a+b;
 }
 
-</code></pre>
+console.log(func(2,5)); // SUCCESS
+console.log(func("2","5")); // SUCCESS
+console.log(func(true,true)); // ERROR</code></pre>
+
+        <hr>
+        <hr>
+
+
+        <h6 id="interface"><i class="bi bi-arrow-return-right"></i> INTERFACE <span>Interface</span></h6>
+        <pre><code><span class="blue">Typeleri obje olarak belirleyip kullanmayı sağlar. Zorunlu olmasını istediğimiz fonksiyonlarıda içerebilir.</span>
+<span class="code-text">interface Test {
+    name: string;
+    age: number;
+    sayHello();
+}</span>
+
+function func(people<span class="code-text">:Test</span>){
+    sayHello(){
+        console.log("Hello");
+    }
+    return people.name + " " + people.age;
+}
+
+console.log(func({name:"John", age:30}));</code></pre>
+
+        <h6 id="functiontypeinterface"><i class="bi bi-arrow-return-right"></i> FUNCTION TYPE INTERFACE
+            <span>Interface</span>
+        </h6>
+        <pre><code><span class="blue">Fonksiyonlar için parametre ve return değerlerini tutan interface oluşturma.</span>
+<span class="code-text">interface stringFormat {
+    (str:string, isCase: boolean):string
+}</span>
+
+let format: <span class="code-text">stringFormat</span> = function (str:string,isCase:boolean):string{
+    return isCase ? str.toUpperCase() : str.toLowerCase();
+}
+
+console.log(format("John Doe", false));</code></pre>
+
+        <h6 id="interfaceextends"><i class="bi bi-arrow-return-right"></i> INTERFACE EXTENDS
+            <span>Interface</span>
+        </h6>
+        <pre><code><span class="blue">Interface miras alma.</span>
+interface Test {
+    name: string,
+    surname: string
+}
+
+<span class="code-text">interface Test2 extends Test</span> {
+    age: number
+}</code></pre>
+
+        <hr>
+        <hr>
+
+        <h6 id="accessmodifier"><i class="bi bi-arrow-return-right"></i> ACCESS MODIFIER <span>Interface</span></h6>
+        <pre><code><span class="green">PUBLIC</span>
+<span class="blue">Dışarıdan erişilebilir değerler için kullanılır varsayılan publictir.</span>
+class Person {
+    <span class="code-text">public</span> code:number;
+    <span class="code-text">public</span> name:string;
+    <span class="code-text">public</span> surname:string;
+
+    constructor(code:number,name:string,surname:string){
+        this.code= code;
+        this.name= name;
+        this.surname= surname;
+    }
+}
+
+let newPerson = new Person(15,"John","Doe");
+console.log(newPerson.code); // 15
+
+<span class="green">PRIVATE</span>
+<span class="blue">Dışarıdan ve Miras alındığında da erişelemez.</span>
+class Person {
+    <span class="code-text">private</span> code:number;
+    <span class="code-text">private</span> name:string;
+    <span class="code-text">private</span> surname:string;
+
+    constructor(code:number,name:string,surname:string){
+        this.code= code;
+        this.name= name;
+        this.surname= surname;
+    }
+}
+
+let newPerson = new Person(15,"John","Doe");
+console.log(newPerson.code); // X(erişilemez.)
+
+<span class="green">PROTECTED</span>
+<span class="blue">Dışarıdan erişelemez fakat miras alınan classlardan erişilebilir.</span>
+class Person {
+    <span class="code-text">protected</span> code:number;
+    <span class="code-text">protected</span> name:string;
+    <span class="code-text">protected</span> surname:string;
+
+    constructor(code:number,name:string,surname:string){
+        this.code= code;
+        this.name= name;
+        this.surname= surname;
+    }
+}
+
+let newPerson = new Person(15,"John","Doe");
+console.log(newPerson.code); // X(erişilemez.)
+
+<span class="green">READONLY</span>
+<span class="blue">Dışarıdan erişilebilir fakat değişterilemez.</span>
+class Person {
+    <span class="code-text">readonly</span> code:number;
+    name:string;
+    surname:string;
+
+    constructor(code:number,name:string,surname:string){
+        this.code= code;
+        this.name= name;
+        this.surname= surname;
+    }
+}
+
+let newPerson = new Person(15,"John","Doe");
+console.log(newPerson.code); // 15
+newPerson.code = 40; // X(değişterilemez)
+console.log(newPerson.code); // X</code></pre>
+
+        <hr>
+        <hr>
+
+        <h6 id="classparameters"><i class="bi bi-arrow-return-right"></i> CLASS PARAMETERS
+            <span>Interface</span>
+        </h6>
+        <pre><code><span class="blue">Constructora gelicek parametrelerin tiplerini belirtme.</span>
+class Person {
+    <span class="code-text">code:number;
+    name:string;
+    surname:string;</span>
+    constructor(<span class="code-text">code:number,name:string,surname:string</span>){
+        this.code= code;
+        this.name= name;
+        this.surname= surname;
+    }
+}
+
+let newPerson = new Person(15,"John","Doe");
+console.log(newPerson);</code></pre>
+
+
+        <h6 id="interfaceimplements"><i class="bi bi-arrow-return-right"></i> INTERFACE IMPLEMENTS
+            <span>Interface</span>
+        </h6>
+        <pre><code><span class="blue">Classa interface bağlama</span>
+interface Test {
+    name: string,
+    age: number
+}
+<span class="code-text">class testClass impelements Test</span> {
+    name:string;
+    age:number;
+    constructor(name:string,age:number){
+        this.name = name;
+        this.age = age;
+    }
+}</code></pre>
+
+        <hr>
+        <hr>
+
+        <h6 id="generic"><i class="bi bi-arrow-return-right"></i> GENERIC
+            <span>Generic</span>
+        </h6>
+        <pre><code><span class="blue">Fonksiyonlara veya Classlara tipleri parametre gibi göndermek.</span>
+function func1<span class="code-text">&lt;Type>(a:Type):Type</span>{
+    return a;
+}
+
+let testVariable = func1<span class="code-text">&lt;number></span>(1);</code></pre>
+
+        <h6 id="genericconstraints"><i class="bi bi-arrow-return-right"></i> GENERIC CONSTRAINTS
+            <span>Generic</span>
+        </h6>
+        <pre><code>function func1&lt;Type1 <span class="code-text">extends object</span>,Type2 <span class="code-text">extends object</span>>(a:Type1,b:Type2){
+    return {
+        ...a,
+        ...b
+    };
+}
+
+let testVariable = func1({name:"John"},{age: 10}); // SUCCESS
+let testVariable2 = func1({name:"John"},20); // ERROR</code></pre>
+
+    </div>
 
     <script src="app.js"></script>
 </body>
